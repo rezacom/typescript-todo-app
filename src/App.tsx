@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import List from "./components/List";
+import AddTodoList from "./components/AddTodoList";
+
+export interface TState {
+  todos: { name: string; age: number; url: string; note?: string }[];
+}
 
 function App() {
+  const [data, setData] = useState<TState["todos"]>([
+    {
+      name: "Ali Akbar",
+      age: 20,
+      url: "https://picsum.photos/100/100",
+      note: "Just add your desired image size (width & height) after our URL, and you'll get a random image.",
+    },
+  ]);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Todo App Typescript</h1>
+      <List todos={data} />
+      <AddTodoList handleSet={setData} todos={data} />
     </div>
   );
 }
